@@ -35,7 +35,7 @@ public class StudentConfiguration {
 		http.csrf(csrf -> csrf.disable());
 		http.authorizeHttpRequests(auth -> {
 			 auth.requestMatchers("/api/**").permitAll()
-			        .requestMatchers("/access").permitAll()
+			        .requestMatchers("/access").authenticated()
 					.anyRequest().authenticated();
 		});
 		http.httpBasic(Customizer.withDefaults());
