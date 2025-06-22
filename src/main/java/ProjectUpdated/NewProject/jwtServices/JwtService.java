@@ -38,7 +38,7 @@ public class JwtService {
 	public String generateToken(String username) {
 		Map<String, Object> claims = new HashMap<>();
 		// Set the expiration time to 15 minutes
-		long expirationTimeMillis = 15 * 60 * 1000; // 15 minutes in milliseconds
+		long expirationTimeMillis = 1 * 60 * 1000; // 15 minutes in milliseconds
 		Date issuedAt = new Date(System.currentTimeMillis());
 		Date expirationDate = new Date(System.currentTimeMillis() + expirationTimeMillis);
 		return Jwts.builder().setClaims(claims) // Use setClaims instead of claims()
@@ -75,7 +75,7 @@ public class JwtService {
 		return (userName.equals(userDeatils.getUsername()) && !isTokenExpired(token));
 	}
 
-	private boolean isTokenExpired(String token) {
+	public boolean isTokenExpired(String token) {
 		return extractExpiration(token).before(new Date());
 	}
 
