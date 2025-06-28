@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import ProjectUpdated.NewProject.entity.Student;
 
 @Service
-public interface StudentService extends UserDetailsService{
+public interface StudentService{
 
 	public Student createStudent(Student student) throws Exception;
 	
-	public String loginStudent(Student student);
+	public ResponseEntity<?> loginStudent(Student student);
 	
-	public ResponseEntity<List<Student>> getAllStudent();
+	public List<Student> getAllStudent(int pageno,int pagesize);
 	
 	
 	

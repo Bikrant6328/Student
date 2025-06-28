@@ -10,45 +10,55 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ProjectUpdated.NewProject.jwtServices.JwtService;
+import ProjectUpdated.NewProject.customexception.CustomException;
+import ProjectUpdated.NewProject.entity.Student;
+import ProjectUpdated.NewProject.entity.Teacher;
+import ProjectUpdated.NewProject.service.TeacherService;
 import ch.qos.logback.classic.Logger;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/access")
+@RequestMapping("/api/teacher")
 @Slf4j
 public class TeacherController {
+
 	@Autowired
-	private JwtService jwtService;
+	private TeacherService teacherService;
 
 	private static final Logger log = (Logger) LoggerFactory.getLogger(TeacherController.class);
 
 	List<String> allTeacher = Arrays.asList("Ritesh", "Shreyansh", "Raju");
 
-	@GetMapping("/getAll")
-	public ResponseEntity<?> allTeachers(@RequestHeader("Authorization") String authHeader) {
-		try {
-			// Check if the token is present and valid
-			if (authHeader != null && authHeader.startsWith("Bearer ")) {
-				String token = authHeader.substring(7); // Remove "Bearer "
-				if (jwtService.isTokenExpired(token)) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token expired. Please log in again.");
-				}
-			} else {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-						.body("Authorization header is missing or invalid.");
-			}
-			log.info("Fetching all teachers");
-			return ResponseEntity.ok(allTeacher); // Return the list of teachers
-		} catch (Exception e) {
-			log.error("Error fetching teachers", e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing request");
-		}
-
+	
+	@GetMapping("/getPage")
+	public String teacherLogin() {
+		return  "Welcome to Teacher page";
 	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher) throws Exception {
+	    try {
+	        Teacher details = teacherService.createTeacher(teacher);
+	        return ResponseEntity.status(HttpStatus.CREATED).body(details);
+	    } catch (CustomException e) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	    }
+	}
+
+	
+	
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> loginTeacher(@RequestBody Teacher teacher) {
+		ResponseEntity<?> details = teacherService.loginTeacher(teacher);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(details);
+
+	} 
+	
 }

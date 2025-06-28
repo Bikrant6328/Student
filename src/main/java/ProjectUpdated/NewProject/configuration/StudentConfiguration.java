@@ -34,13 +34,15 @@ public class StudentConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable());
 		http.authorizeHttpRequests(auth -> {
-			 auth.requestMatchers("/api/**").permitAll()
-			        .requestMatchers("/access").authenticated()
+			auth.requestMatchers("/api/student/login").permitAll()
+			        .requestMatchers("/api/teacher/login").permitAll()
+			        .requestMatchers("/api/student/register").permitAll()
+			        .requestMatchers("/api/teacher/register").permitAll()
 					.anyRequest().authenticated();
 		});
 		http.httpBasic(Customizer.withDefaults());
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-		http.formLogin(form -> form.defaultSuccessUrl("/api/login", true));
+		http.formLogin();
 		
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
@@ -63,5 +65,7 @@ public class StudentConfiguration {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return  config.getAuthenticationManager();
 	}
+
+
 	
 }
