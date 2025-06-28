@@ -9,6 +9,6 @@ import ProjectUpdated.NewProject.entity.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Integer>{
 
-	Student findByUsername(String name);
+      Student findByUsername(String name);
 
 }
