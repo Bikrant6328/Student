@@ -38,6 +38,9 @@ public class StudentConfiguration {
 			        .requestMatchers("/api/teacher/login").permitAll()
 			        .requestMatchers("/api/student/register").permitAll()
 			        .requestMatchers("/api/teacher/register").permitAll()
+			        .requestMatchers("/api/courses/create").permitAll()
+			        .requestMatchers("/api/test").permitAll()
+			        .requestMatchers("/api/enrollments/enroll").permitAll()
 					.anyRequest().authenticated();
 		});
 		http.httpBasic(Customizer.withDefaults());

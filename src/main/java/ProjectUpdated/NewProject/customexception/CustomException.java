@@ -1,6 +1,6 @@
 package ProjectUpdated.NewProject.customexception;
 
-public class CustomException extends Exception {
+public class CustomException extends RuntimeException {
 
 	private String code;
 	private String message;
