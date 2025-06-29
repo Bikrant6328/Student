@@ -15,15 +15,17 @@ import jakarta.validation.constraints.Size;
 @Table(name = "teachers")
 public class Teacher extends User {
 
+	private String teachername;
 	private String department;
 	private String subject;
 
 	public Teacher(long id, @NotBlank @Size(max = 50) String username, @NotBlank @Size(max = 120) String password,
-			@NotBlank @Size(max = 50) String email, Set<Role> roles, String department, String subject) {
+			@NotBlank @Size(max = 50) String email, Set<Role> roles, String department, String subject,String teachername) {
 
 		super(id, username, password, email, roles);
 		this.department = department;
 		this.subject = subject;
+		this.teachername = teachername;
 	}
 
 	public Teacher() {
@@ -46,6 +48,17 @@ public class Teacher extends User {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
+	public String getTeachername() {
+		return teachername;
+	}
+
+	public void setTeachername(String teachername) {
+		this.teachername = teachername;
+	}
+	
+	
+	
 
 //	public Teacher(String username, @NotBlank @Size(max = 120) String password, @NotBlank @Size(max = 50) String email,
 //			String department, String subject) {

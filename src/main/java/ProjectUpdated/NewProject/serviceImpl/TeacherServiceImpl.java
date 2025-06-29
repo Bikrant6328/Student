@@ -75,6 +75,7 @@ public class TeacherServiceImpl implements TeacherService {
         details.setEmail(teacher.getEmail());
         details.setDepartment(teacher.getDepartment()); // Assuming you have a department field
         details.setSubject(teacher.getSubject());
+        details.setTeachername(teacher.getTeachername());
         
         // Assign roles to the teacher
         Role teacherRole = roleRepository.findByName(ERole.ROLE_TEACHER)

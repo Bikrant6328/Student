@@ -48,8 +48,8 @@ public class User {
 	@Size(max = 50)
 	private String email;
 
-	@JsonIgnore // This side is serialized
-    @ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore // This side is not serialized
+    @ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
