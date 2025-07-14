@@ -16,101 +16,107 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 
 @Entity
-@Table(name="Course")
+@Table(name = "Course")
 public class Course {
 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	    
-	    private String title;
-	    private String instructor;
-	    private String category;
-	    private String description;
-	    private int duration;
-	    
-	    @JsonIgnore
-	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-	    private Set<Enrollment> enrollments = new HashSet<>();
-	    
-	    @Version
-	    private Long version; 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		public Long getId() {
-			return id;
-		}
+	private String title;
+	private String instructor;
+	private String category;
+	private String description;
+	private int duration;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	@JsonIgnore
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	private Set<Enrollment> enrollments = new HashSet<>();
 
-		public String getTitle() {
-			return title;
-		}
+	@Version
+	private Long version;
+	
+	
 
-		public void setTitle(String title) {
-			this.title = title;
-		}
+	public Long getVersion() {
+		return version;
+	}
 
-		public String getInstructor() {
-			return instructor;
-		}
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
-		public void setInstructor(String instructor) {
-			this.instructor = instructor;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public String getCategory() {
-			return category;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public void setCategory(String category) {
-			this.category = category;
-		}
+	public String getTitle() {
+		return title;
+	}
 
-		public String getDescription() {
-			return description;
-		}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-		public void setDescription(String description) {
-			this.description = description;
-		}
+	public String getInstructor() {
+		return instructor;
+	}
 
-		public int getDuration() {
-			return duration;
-		}
+	public void setInstructor(String instructor) {
+		this.instructor = instructor;
+	}
 
-		public void setDuration(int duration) {
-			this.duration = duration;
-		}
+	public String getCategory() {
+		return category;
+	}
 
-		public Set<Enrollment> getEnrollments() {
-			return enrollments;
-		}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-		public void setEnrollments(Set<Enrollment> enrollments) {
-			this.enrollments = enrollments;
-		}
+	public String getDescription() {
+		return description;
+	}
 
-		public Course(Long id, String title, String instructor, String category, String description, int duration,
-				Set<Enrollment> enrollments) {
-			super();
-			this.id = id;
-			this.title = title;
-			this.instructor = instructor;
-			this.category = category;
-			this.description = description;
-			this.duration = duration;
-			this.enrollments = enrollments;
-		}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-		public Course() {
-			super();
-		}
-		
-		
-	    
-	    
-		
-	    
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public Set<Enrollment> getEnrollments() {
+		return enrollments;
+	}
+
+	public void setEnrollments(Set<Enrollment> enrollments) {
+		this.enrollments = enrollments;
+	}
+
+	public Course(Long id, String title, String instructor, String category, String description, int duration,
+			Set<Enrollment> enrollments,long version) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.instructor = instructor;
+		this.category = category;
+		this.description = description;
+		this.duration = duration;
+		this.enrollments = enrollments;
+		this.version=version;
+	}
+
+	public Course() {
+		super();
+	}
+
 }
