@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,14 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import ProjectUpdated.NewProject.entity.Student;
+import ProjectUpdated.NewProject.entity.StudentOrder;
+import ProjectUpdated.NewProject.service.StudentOrderService;
 import ProjectUpdated.NewProject.service.StudentService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private StudentOrderService orderService;
 
 	@GetMapping("/getlogin")
 	public String studentLoginCheck() {
@@ -55,5 +62,16 @@ public class StudentController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(details);
 
 	}
+	
+	
+	@PostMapping(value="/createOrder",produces = "application/json")
+	public ResponseEntity<StudentOrder> createOrder(@RequestBody StudentOrder order) throws Exception{
+	  StudentOrder createdOrder = orderService.createOrder(order);
+	  return new ResponseEntity<>(createdOrder,HttpStatus.CREATED);
+		
+	}
+	
+	
+	
 
 }

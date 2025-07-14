@@ -1,12 +1,15 @@
 package ProjectUpdated.NewProject.jwtServices;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,9 +21,23 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class JwtService {
+	private String secret_key="";
+	
+	public JwtService() {
+		KeyGenerator keyGen;
+		try {
+			keyGen = KeyGenerator.getInstance("hmacSHA256");
+			SecretKey sk =  keyGen.generateKey();
+			secret_key = java.util.Base64.getEncoder().encodeToString(sk.getEncoded());
+			
+		}catch(NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
 
-    @Value("${jwt.secret}")
-    private String SECRET_KEY;
+//    @Value("${jwt.secret}")
+//    private String SECRET_KEY;
 
     @Value("${jwt.expiration}")
     private long jwtExpiration;
@@ -80,7 +97,7 @@ public class JwtService {
 
     private SecretKey getSigningKey() {
         // Ensure the secret key is properly encoded
-        byte[] keyBytes = SECRET_KEY.getBytes();
+        byte[] keyBytes = secret_key.getBytes();
         return new SecretKeySpec(keyBytes, SignatureAlgorithm.HS256.getJcaName());
     }
 }

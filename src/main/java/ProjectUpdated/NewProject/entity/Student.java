@@ -28,7 +28,7 @@ public class Student extends User {
 
 
 	private String stream;
-	private String studentname;
+//	private String studentname;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
@@ -40,7 +40,7 @@ public class Student extends User {
 		super(id, username, password, email, roles);
 		this.contact = contact;
 		this.stream = stream;
-		this.studentname = studentname;
+		//this.studentname = studentname;
 		this.enrollments = enrollments;
 	}
 
@@ -64,13 +64,13 @@ public class Student extends User {
 		this.stream = stream;
 	}
 
-	public String getStudentname() {
-		return studentname;
-	}
+//	public String getStudentname() {
+//		return studentname;
+//	}
 
-	public void setStudentname(String studentname) {
-		this.studentname = studentname;
-	}
+//	public void setStudentname(String studentname) {
+//		this.studentname = studentname;
+//	}
 
 	public Set<Enrollment> getEnrollments() {
 		return enrollments;

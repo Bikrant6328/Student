@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "teachers")
 public class Teacher extends User {
 
-	private String teachername;
+//	private String teachername;
 	private String department;
 	private String subject;
 
@@ -25,7 +25,7 @@ public class Teacher extends User {
 		super(id, username, password, email, roles);
 		this.department = department;
 		this.subject = subject;
-		this.teachername = teachername;
+//		this.teachername = teachername;
 	}
 
 	public Teacher() {
@@ -49,13 +49,13 @@ public class Teacher extends User {
 		this.subject = subject;
 	}
 
-	public String getTeachername() {
-		return teachername;
-	}
-
-	public void setTeachername(String teachername) {
-		this.teachername = teachername;
-	}
+//	public String getTeachername() {
+//		return teachername;
+//	}
+//
+//	public void setTeachername(String teachername) {
+//		this.teachername = teachername;
+//	}
 	
 	
 	

@@ -65,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
         details.setEmail(student.getEmail());
         details.setContact(student.getContact());
         details.setStream(student.getStream());
-        details.setStudentname(student.getStudentname());
+       // details.setStudentname(student.getStudentname());
 
         // Assign roles to the student
         Role studentRole = roleRepository.findByName(ERole.ROLE_STUDENT)

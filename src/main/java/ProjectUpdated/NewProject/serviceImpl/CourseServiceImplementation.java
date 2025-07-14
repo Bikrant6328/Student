@@ -40,6 +40,7 @@ public class CourseServiceImplementation implements CourseService {
 	        course.setCategory(courseDetails.getCategory());
 	        course.setDescription(courseDetails.getDescription());
 	        course.setDuration(courseDetails.getDuration());
+	        course.setVersion(courseDetails.getVersion());
 	        return courseRepository.save(course);
 	}
 
